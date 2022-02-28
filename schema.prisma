@@ -116,9 +116,10 @@ model BannedUsers {
 
 model UserConnections {
   id String   @id @db.VarChar(255)
-  name String
-  tokens String[]
-  config String[]
+  user UserGeneralConfig @relation(fields: [id], references: [id])
+  name String?
+  tokens String?
+  config String?
   @@map("user_connections")
 }
 
@@ -170,6 +171,7 @@ model UserCooldowns {
 
 model UserGeneralConfig {
   id String
+  connections UserConnections?
   profile UserProfile?
   cooldowns UserCooldowns?
   locale String @default("pt-BR")
