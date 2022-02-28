@@ -25,11 +25,13 @@ model Background {
 }
 
 model DonationKeys {
-  active_in  String
-  user String @id
+  active_in  String?
+  donation UserDonations @relation(fields: [user], references: [id])
+  id String @id
+  user String
   value Float @db.DoublePrecision
   tier Int @default(1)
-  expires_at DateTime
+  expires_at Float
   metadata Json @db.Json
   @@map("premium_keys")
 }
@@ -152,8 +154,9 @@ model UserProfile {
 
 model UserDonations {
     id String
-    expire_at DateTime
-    enabled_at DateTime
+    key DonationKeys?
+    expire_at Float
+    enabled_at Float
     tier Int @default(1)
     expired Boolean @default(false)
     @@id([id])
