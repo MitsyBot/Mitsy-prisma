@@ -25,6 +25,7 @@ model Background {
 }
 
 model DonationKeys {
+  guild GuildConfig? @relation(fields: [active_in], references: [id])
   active_in  String?
   donation UserDonations @relation(fields: [user], references: [id])
   id String @id
@@ -196,6 +197,7 @@ model GuildProfile {
 
 model GuildConfig {
   id String
+  key DonationKeys?
   blacklisted_channels String[]
   custom_commands String[]
   disabled_commands String[]
