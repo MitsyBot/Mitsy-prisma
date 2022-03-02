@@ -122,8 +122,8 @@ model UserConnections {
   id String   @id @db.VarChar(255)
   user UserGeneralConfig @relation(fields: [id], references: [id])
   name String?
-  tokens String?
-  config String?
+  tokens Json?
+  config Json?
   @@map("user_connections")
 }
 
