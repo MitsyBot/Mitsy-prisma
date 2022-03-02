@@ -38,8 +38,9 @@ model DonationKeys {
 }
 
 model Dailies {
-  received_by String @db.VarChar(255) @id
-  received_at DateTime @default(now())
+  id Int @id @default(autoincrement())
+  received_by String @db.VarChar(255) 
+  received_at Float
   ip String @db.Text
   email String @db.Text
   user_agent String @db.VarChar(255)
