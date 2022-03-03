@@ -142,6 +142,7 @@ model UserProfile {
   active_badges String[]
   badge_list String[]
   active_colors String[]
+  warn_login Boolean @default(true)
   color String @default("#f895fb")
   isAfk Boolean @default(false)
   afkReason String @db.Text @default("")
