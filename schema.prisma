@@ -56,15 +56,16 @@ model Reminders {
 }
 
 model Payments {
-  user String @db.VarChar(255)
+  user Json @db.Json
   gateway String
   reason String @db.Text
   money Float
-  created_at DateTime @default(now())
+  created_at Float
   paid Boolean @default(false)
-  paid_at DateTime
-  expires_at DateTime
-  reference_id String @db.Uuid @id
+  paid_at Float?
+  expires_at String
+  uuid String @db.Uuid @id
+  reference_id String
   metadata Json @db.Json
   @@map("premium_payments")
 }
