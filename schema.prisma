@@ -65,7 +65,7 @@ model Payments {
   paid_at Float?
   expires_at String
   uuid String @db.Uuid @id
-  reference_id String
+  reference_id String @unique
   metadata Json @db.Json
   @@map("premium_payments")
 }
