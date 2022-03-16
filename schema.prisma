@@ -24,6 +24,15 @@ model Background {
   @@map("shop_backgrounds")
 }
 
+model CometTransaction {
+  id Int @id @default(autoincrement())
+  reason String
+  given_by String
+  received_by String
+  given_at String
+  quantity Decimal
+}
+
 model DonationKeys {
   guild GuildConfig? @relation(fields: [active_in], references: [id])
   active_in  String?
