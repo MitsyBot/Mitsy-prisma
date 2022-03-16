@@ -31,6 +31,7 @@ model CometTransaction {
   received_by String
   given_at Float?
   quantity Decimal
+  @@map("comet_transactions")
 }
 
 model DonationKeys {
