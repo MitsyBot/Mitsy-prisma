@@ -29,7 +29,7 @@ model CometTransaction {
   reason String
   given_by String
   received_by String
-  given_at String
+  given_at Float?
   quantity Decimal
 }
 
