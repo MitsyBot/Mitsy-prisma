@@ -105,9 +105,12 @@ model UserAchievements {
 }
 
 model Fanarts {
-  user String @id @db.VarChar(255)
-  id Int @default(0)
-  name String @db.Text
+  artist String @id @db.VarChar(255)
+  id Int @default(autoincrement())
+  title String @db.Text
+  description String
+  created_at DateTime @default(now())
+  file String @db.Text
   @@map("mitsy_fanarts")
 }
 
