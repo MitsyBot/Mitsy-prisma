@@ -105,8 +105,8 @@ model UserAchievements {
 }
 
 model Fanarts {
-  artist String @id @db.VarChar(255)
-  id Int @default(autoincrement())
+  artist String @db.VarChar(255)
+  id Int @id @default(autoincrement())
   title String @db.Text
   description String
   created_at DateTime @default(now())
