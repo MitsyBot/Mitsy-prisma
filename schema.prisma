@@ -10,7 +10,6 @@ datasource db {
 model Client {
   id             String   @id @default("790760362060283974") @db.VarChar(255)
   maintenance  String[]
-
   @@map("mitsy_client")
 }
 
@@ -33,7 +32,7 @@ model DailyShops {
 
 model CometTransaction {
   id Int @id @default(autoincrement())
-  reason String
+  reason String?
   given_by String
   received_by String
   given_at String
@@ -43,7 +42,7 @@ model CometTransaction {
 
 model DonationKeys {
   guild GuildConfig? @relation(fields: [active_in], references: [id])
-  active_in  String?
+  active_in String? @unique
   donation UserDonations @relation(fields: [user], references: [id])
   id String @id
   user String
@@ -172,7 +171,6 @@ model UserProfile {
   married_since Float @default(0) 
   gender String @default("UNKNOWN")
   @@id([id])
-
   @@map("user_profile")
 }
 
@@ -228,6 +226,24 @@ model GuildConfig {
   prefix String @default("-")
   custom_warn_message Boolean @default(false)
   blacklisted_warning Json?
+  event_log_config EventLogConfigs?
   @@id([id])
   @@map("guild_general")
+}
+
+model EventLogConfigs {
+  id String
+  enabled Boolean @default(false)
+  event_log_channel String?
+  member_banned Boolean @default(false)
+  member_unbanned Boolean @default(false)
+  message_edited Boolean @default(false)
+  message_deleted Boolean @default(false)
+  nickname_changes Boolean @default(false)
+  voice_channel_joins Boolean @default(false)
+  voice_channel_leaves Boolean @default(false)
+  avatar_changes Boolean @default(false)
+  guild GuildConfig @relation(fields: [id], references: [id])
+  @@id([id])
+  @@map("guild_event_log")
 }
