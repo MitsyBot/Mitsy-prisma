@@ -235,6 +235,7 @@ model EventLogConfigs {
   id String
   enabled Boolean @default(false)
   event_log_channel String?
+  ignore_bots Boolean @default(false)
   member_banned Boolean @default(false)
   member_unbanned Boolean @default(false)
   message_edited Boolean @default(false)
