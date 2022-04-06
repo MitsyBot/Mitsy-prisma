@@ -227,6 +227,7 @@ model GuildConfig {
   custom_warn_message Boolean @default(false)
   blacklisted_warning Json?
   event_log_config EventLogConfigs?
+  invite_blocker_config InviteBlockerConfigs?
   @@id([id])
   @@map("guild_general")
 }
@@ -247,4 +248,18 @@ model EventLogConfigs {
   guild GuildConfig @relation(fields: [id], references: [id])
   @@id([id])
   @@map("guild_event_log")
+}
+
+
+model InviteBlockerConfigs {
+    id String
+    enabled Boolean @default(false)
+    whitelisted_channels Json[]
+    whitelist_server_invites Boolean @default(true)
+    delete_message Boolean @default(true)
+    tell_user Boolean @default(true)
+    warn_message String @default("{@user} Você não pode enviar convites de outros servidores aqui!")
+    guild GuildConfig @relation(fields: [id], references: [id])
+    @@id([id])
+    @@map("guild_invite_blocker")
 }
