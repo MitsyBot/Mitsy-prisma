@@ -115,7 +115,7 @@ model Fanarts {
 
 model Colors {
   id String @id @db.Text
-  cost Int @default(0)
+  cost Int @default(1000)
   @@map("shop_colors")
 }
 
@@ -225,7 +225,7 @@ model GuildConfig {
   lang String @default("pt-BR")
   prefix String @default("-")
   custom_warn_message Boolean @default(false)
-  blacklisted_warning Json?
+  blacklisted_warning Json @default("{ \"content\": \"Voce não pode usar comandos neste canal\" }")
   event_log_config EventLogConfigs?
   invite_blocker_config InviteBlockerConfigs?
   @@id([id])
@@ -258,7 +258,7 @@ model InviteBlockerConfigs {
     whitelist_server_invites Boolean @default(true)
     delete_message Boolean @default(true)
     tell_user Boolean @default(true)
-    warn_message Json?
+    warn_message Json @default("{ \"content\": \"Voce não pode enviar invites neste canal\" }")
     guild GuildConfig @relation(fields: [id], references: [id])
     @@id([id])
     @@map("guild_invite_blocker")
