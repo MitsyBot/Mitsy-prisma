@@ -228,9 +228,20 @@ model GuildConfig {
   custom_warn_message Boolean @default(false)
   blacklisted_warning Json @default("{ \"content\": \"Voce não pode usar comandos neste canal\" }")
   event_log_config EventLogConfigs?
+  birthday_config BirthdayConfigs?
   invite_blocker_config InviteBlockerConfigs?
   @@id([id])
   @@map("guild_general")
+}
+
+model BirthdayConfigs {
+  id String
+  enabled Boolean @default(false)
+  channel String?
+  message Json @default("{ \"content\": \"{@User} parabens meu querido\" }")
+  guild GuildConfig? @relation(fields: [id], references: [id])
+  @@id([id])
+  @@map("guild_birthday")
 }
 
 model EventLogConfigs {
