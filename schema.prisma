@@ -209,16 +209,15 @@ model UserGeneralConfig {
 
 model GuildProfile {
   guild String
-  user String
+  user String @id
   xp Float
   level Float
   isInGuild Boolean @default(true)
-  @@id([user])
   @@map("guild_profiles")
 }
 
 model GuildConfig {
-  id String
+  id String @id
   key DonationKeys?
   blacklisted_channels String[]
   custom_commands String[]
@@ -226,26 +225,24 @@ model GuildConfig {
   lang String @default("pt-BR")
   prefix String @default("-")
   custom_warn_message Boolean @default(false)
-  blacklisted_warning Json @default("{ \"content\": \"Voce não pode usar comandos neste canal\" }")
+  blacklisted_warning Json? @default("{ \"content\": \"Voce não pode usar comandos neste canal\" }")
   event_log_config EventLogConfigs?
   birthday_config BirthdayConfigs?
   invite_blocker_config InviteBlockerConfigs?
-  @@id([id])
   @@map("guild_general")
 }
 
 model BirthdayConfigs {
-  id String
+  id String @id
   enabled Boolean @default(false)
   channel String?
   message Json @default("{ \"content\": \"{@User} parabens meu querido\" }")
   guild GuildConfig? @relation(fields: [id], references: [id])
-  @@id([id])
   @@map("guild_birthday")
 }
 
 model EventLogConfigs {
-  id String
+  id String @id
   enabled Boolean @default(false)
   event_log_channel String?
   ignore_bots Boolean @default(false)
@@ -258,13 +255,12 @@ model EventLogConfigs {
   voice_channel_leaves Boolean @default(false)
   avatar_changes Boolean @default(false)
   guild GuildConfig @relation(fields: [id], references: [id])
-  @@id([id])
   @@map("guild_event_log")
 }
 
 
 model InviteBlockerConfigs {
-    id String
+    id String @id
     enabled Boolean @default(false)
     whitelisted_channels Json[]
     whitelist_server_invites Boolean @default(true)
@@ -272,6 +268,5 @@ model InviteBlockerConfigs {
     tell_user Boolean @default(true)
     warn_message Json @default("{ \"content\": \"Voce não pode enviar invites neste canal\" }")
     guild GuildConfig @relation(fields: [id], references: [id])
-    @@id([id])
     @@map("guild_invite_blocker")
 }
