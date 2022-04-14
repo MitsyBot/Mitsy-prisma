@@ -41,7 +41,7 @@ model CometTransaction {
 }
 
 model DonationKeys {
-  guild GuildConfig? @relation(fields: [active_in], references: [id])
+  guild GuildConfig? @relation(fields: [active_in], references: [guildId])
   active_in String? @unique
   donation UserDonations @relation(fields: [user], references: [id])
   id String @id
@@ -217,7 +217,8 @@ model GuildProfile {
 }
 
 model GuildConfig {
-  id String @id
+  id BigInt @id @default(autoincrement())
+  guildId String @unique
   key DonationKeys?
   blacklisted_channels String[]
   custom_commands String[]
@@ -238,7 +239,7 @@ model BirthdayConfigs {
   channel String?
   message Json @default("{ \"content\": \"{@User} parabens meu querido\" }")
   guild_id String @unique
-  guild GuildConfig? @relation(fields: [guild_id], references: [id])
+  guild GuildConfig? @relation(fields: [guild_id], references: [guildId])
   @@map("guild_birthday")
 }
 
@@ -256,7 +257,7 @@ model EventLogConfigs {
   voice_channel_leaves Boolean @default(false)
   avatar_changes Boolean @default(false)
   guild_id String @unique
-  guild GuildConfig @relation(fields: [guild_id], references: [id])
+  guild GuildConfig @relation(fields: [guild_id], references: [guildId])
   @@map("guild_event_log")
 }
 
@@ -270,6 +271,6 @@ model InviteBlockerConfigs {
     tell_user Boolean @default(true)
     warn_message Json @default("{ \"content\": \"Voce não pode enviar invites neste canal\" }")
     guild_id String @unique
-    guild GuildConfig @relation(fields: [guild_id], references: [id])
+    guild GuildConfig @relation(fields: [guild_id], references: [guildId])
     @@map("guild_invite_blocker")
 }
