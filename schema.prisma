@@ -228,7 +228,7 @@ model GuildConfig {
   custom_warn_message Boolean @default(false)
   blacklisted_warning Json? @default("{ \"content\": \"Voce não pode usar comandos neste canal\" }")
   event_log_config EventLogConfigs?
-  birthday_config BirthdayC4onfigs?
+  birthday_config BirthdayConfigs?
   invite_blocker_config InviteBlockerConfigs?
   @@map("guild_general")
 }
