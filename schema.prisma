@@ -228,6 +228,7 @@ model GuildConfig {
   custom_warn_message Boolean @default(false)
   blacklisted_warning Json? @default("{ \"content\": \"Voce não pode usar comandos neste canal\" }")
   event_log_config EventLogConfigs?
+  welcomer_config WelcomerConfig?
   birthday_config BirthdayConfigs?
   invite_blocker_config InviteBlockerConfigs?
   @@map("guild_general")
@@ -259,6 +260,22 @@ model EventLogConfigs {
   guild_id String @unique
   guild GuildConfig @relation(fields: [guild_id], references: [guildId])
   @@map("guild_event_log")
+}
+
+model WelcomerConfig {
+    id BigInt @id @default(autoincrement())
+    tell_on_join Boolean @default(false)
+    channel_join String?
+    join_message Json @default("{ \"content\": \"{@User} entrou no servidor!\" }")
+    delete_join_messages_after Int @default(0)
+    tell_on_remove Boolean @default(false)
+    channel_remove String?
+    remove_message Json @default("{ \"content\": \"{@User} saiu do servidor!\" }")
+    delete_remove_messages_after Int @default(0)
+    tell_on_private_join Boolean @default(false)
+    join_private_message Json @default("{ \"content\": \"{@User} Bem vindo ao servidor!\" }")
+    guild_id String @unique
+    guild GuildConfig @relation(fields: [guild_id], references: [guildId])
 }
 
 
