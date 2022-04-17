@@ -264,6 +264,7 @@ model EventLogConfigs {
 
 model WelcomerConfig {
     id BigInt @id @default(autoincrement())
+    enabled Boolean @default(false)
     tell_on_join Boolean @default(false)
     channel_join String?
     join_message Json @default("{ \"content\": \"{@User} entrou no servidor!\" }")
