@@ -41,7 +41,7 @@ model CometTransaction {
 }
 
 model DonationKeys {
-  guild GuildConfig? @relation(fields: [active_in], references: [guildId])
+  guild GuildConfig? @relation(fields: [active_in], references: [id])
   active_in String? @unique
   donation UserDonations @relation(fields: [user], references: [id])
   id String @id
@@ -217,8 +217,7 @@ model GuildProfile {
 }
 
 model GuildConfig {
-  id BigInt @id @default(autoincrement())
-  guildId String @unique
+  id String @id
   key DonationKeys?
   blacklisted_channels String[]
   custom_commands String[]
@@ -235,17 +234,16 @@ model GuildConfig {
 }
 
 model BirthdayConfigs {
-  id BigInt @id @default(autoincrement())
+  id String @id
   enabled Boolean @default(false)
   channel String?
   message Json @default("{ \"content\": \"{@User} parabens meu querido\" }")
-  guild_id String @unique
-  guild GuildConfig? @relation(fields: [guild_id], references: [guildId])
+  guild GuildConfig? @relation(fields: [id], references: [id])
   @@map("guild_birthday")
 }
 
 model EventLogConfigs {
-  id BigInt @id @default(autoincrement())
+  id String @id
   enabled Boolean @default(false)
   event_log_channel String?
   ignore_bots Boolean @default(false)
@@ -257,13 +255,12 @@ model EventLogConfigs {
   voice_channel_joins Boolean @default(false)
   voice_channel_leaves Boolean @default(false)
   avatar_changes Boolean @default(false)
-  guild_id String @unique
-  guild GuildConfig @relation(fields: [guild_id], references: [guildId])
+  guild GuildConfig @relation(fields: [id], references: [id])
   @@map("guild_event_log")
 }
 
 model WelcomerConfig {
-    id BigInt @id @default(autoincrement())
+    id String @id
     enabled Boolean @default(false)
     tell_on_join Boolean @default(false)
     channel_join String?
@@ -275,20 +272,19 @@ model WelcomerConfig {
     delete_remove_messages_after Int @default(0)
     tell_on_private_join Boolean @default(false)
     join_private_message Json @default("{ \"content\": \"{@User} Bem vindo ao servidor!\" }")
-    guild_id String @unique
-    guild GuildConfig @relation(fields: [guild_id], references: [guildId])
+    guild GuildConfig @relation(fields: [id], references: [id])
+    @@map("guild_welcomer")
 }
 
 
 model InviteBlockerConfigs {
-    id BigInt @id @default(autoincrement())
+    id String @id
     enabled Boolean @default(false)
     whitelisted_channels Json[]
     whitelist_server_invites Boolean @default(true)
     delete_message Boolean @default(true)
     tell_user Boolean @default(true)
     warn_message Json @default("{ \"content\": \"Voce não pode enviar invites neste canal\" }")
-    guild_id String @unique
-    guild GuildConfig @relation(fields: [guild_id], references: [guildId])
+    guild GuildConfig @relation(fields: [id], references: [id])
     @@map("guild_invite_blocker")
 }
