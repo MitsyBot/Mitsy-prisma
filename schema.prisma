@@ -229,6 +229,7 @@ model GuildConfig {
   event_log_config EventLogConfigs?
   welcomer_config WelcomerConfig?
   birthday_config BirthdayConfigs?
+  starboard_config StarboardConfigs?
   invite_blocker_config InviteBlockerConfigs?
   @@map("guild_general")
 }
@@ -287,4 +288,15 @@ model InviteBlockerConfigs {
     warn_message Json @default("{ \"content\": \"Voce não pode enviar invites neste canal\" }")
     guild GuildConfig @relation(fields: [id], references: [id])
     @@map("guild_invite_blocker")
+}
+
+
+model StarboardConfigs { 
+    id String @id
+    enabled Boolean @default(false)
+    starboard_channel String?
+    required_stars Int @default(5)
+    emoji String @default("⭐")
+    guild GuildConfig @relation(fields: [id], references: [id])
+    @@map("guild_starboard")
 }
