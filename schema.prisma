@@ -71,6 +71,17 @@ model Reminders {
   @@map("reminders")
 }
 
+model Starboards {
+  message String
+  id String @id
+  channel String
+  guild String
+  user String
+  enabled Boolean @default(true)
+  stars Int @default(0)
+  @@map("starboards")
+}
+
 model Payments {
   user Json @db.Json
   gateway String
