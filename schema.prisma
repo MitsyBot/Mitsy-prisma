@@ -242,6 +242,7 @@ model GuildConfig {
   welcomer_config WelcomerConfig?
   birthday_config BirthdayConfigs?
   starboard_config StarboardConfigs?
+  autorole_config AutoroleConfigs?
   invite_blocker_config InviteBlockerConfigs?
   @@map("guild_general")
 }
@@ -311,4 +312,14 @@ model StarboardConfigs {
     emoji String @default("⭐")
     guild GuildConfig @relation(fields: [id], references: [id])
     @@map("guild_starboard")
+}
+
+model AutoroleConfigs {
+    id String @id
+    enabled Boolean @default(false)
+    roles String[]
+    give_after Int @default(0)
+    give_after_message Boolean @default(false)
+    guild GuildConfig @relation(fields: [id], references: [id])
+    @@map("guild_autorole")
 }
