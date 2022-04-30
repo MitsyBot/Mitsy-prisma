@@ -238,7 +238,7 @@ model GuildConfig {
   lang String @default("pt-BR")
   prefix String @default("-")
   custom_warn_message Boolean @default(false)
-  blacklisted_warning Json? @default("{ \"content\": \"Voce não pode usar comandos neste canal\" }")
+  blacklisted_warning Json? @default("{ \"content\": \"Você não pode usar comandos neste canal\" }")
   event_log_config EventLogConfigs?
   welcomer_config WelcomerConfig?
   birthday_config BirthdayConfigs?
@@ -299,7 +299,7 @@ model InviteBlockerConfigs {
     whitelist_server_invites Boolean @default(true)
     delete_message Boolean @default(true)
     tell_user Boolean @default(true)
-    warn_message Json @default("{ \"content\": \"Voce não pode enviar invites neste canal\" }")
+    warn_message Json @default("{ \"content\": \"Você não pode enviar invites neste canal\" }")
     guild GuildConfig @relation(fields: [id], references: [id])
     @@map("guild_invite_blocker")
 }

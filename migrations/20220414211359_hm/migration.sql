@@ -5,11 +5,11 @@
 
 */
 -- AlterTable
-ALTER TABLE "guild_general" ALTER COLUMN "blacklisted_warning" SET DEFAULT '{ "content": "Voce não pode usar comandos neste canal" }';
+ALTER TABLE "guild_general" ALTER COLUMN "blacklisted_warning" SET DEFAULT '{ "content": "Você não pode usar comandos neste canal" }';
 
 -- AlterTable
 ALTER TABLE "guild_invite_blocker" ALTER COLUMN "warn_message" SET NOT NULL,
-ALTER COLUMN "warn_message" SET DEFAULT '{ "content": "Voce não pode enviar invites neste canal" }';
+ALTER COLUMN "warn_message" SET DEFAULT '{ "content": "Você não pode enviar invites neste canal" }';
 
 -- AlterTable
 ALTER TABLE "shop_colors" ALTER COLUMN "cost" SET DEFAULT 1000;
