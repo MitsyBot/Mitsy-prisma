@@ -99,7 +99,8 @@ model Payments {
 }
 
 model Reputations {
-  given_by String @id @db.VarChar(255)
+  id Int @id @default(autoincrement())
+  given_by String @db.VarChar(255)
   given_by_ip String @db.Text
   given_by_email String @db.Text
   received_by String @db.VarChar(255)
