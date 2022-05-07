@@ -68,7 +68,7 @@ model Reminders {
   user String @db.VarChar(255)
   channel_id String @db.VarChar(255)
   guild_id String @db.VarChar(255)
-  remind_at DateTime 
+  remind_at Float 
   content String @db.Text
   @@map("reminders")
 }
